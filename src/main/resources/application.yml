@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: dev
+
+  jpa:
+    show-sql: true
+    hibernate:
+      use-new-id-generator-mappings: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/tests?useSSL=false&createDatabaseIfNotExist=true
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
+
+  data:
+    mongodb:
+      database: jcd
+    elasticsearch:
+      cluster-nodes: localhost:9300
+
+
+

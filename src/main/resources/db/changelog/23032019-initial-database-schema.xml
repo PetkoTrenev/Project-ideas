@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.1
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.1.xsd">
+    <changeSet author="Petko Trenev" id="23032019-initial-create-database-tables">
+        <comment>Creates the initial database schema - tests</comment>
+        <createTable tableName="student">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="passport_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="passport">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="number" type="VARCHAR(65)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="review_rating">
+            <column name="rating" type="VARCHAR(65)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="description" type="VARCHAR(65)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="review">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="rating" type="VARCHAR(65)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="course_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="course">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Petko Trenev" id="23032019-initial-add-foreign-keys">
+        <addForeignKeyConstraint baseColumnNames="passport_id" baseTableName="student"
+                                 constraintName="fk_STUDENT_PASSWORD"
+                                 referencedColumnNames="id"
+                                 referencedTableName="passport"/>
+
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="review"
+                                 constraintName="fk_COURSE_REVIEWS"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
+        <addForeignKeyConstraint baseColumnNames="rating" baseTableName="review"
+                                 constraintName="fk_REVIEW_RATING"
+                                 referencedColumnNames="rating" referencedTableName="review_rating"/>
+    </changeSet>
+
+    <changeSet id="24032019-initial-add-unique-constraints" author="Petko Trenev">
+        <addUniqueConstraint
+                columnNames="number"
+                constraintName="UNQ_PASSPORT_NUMBER"
+                tableName="PASSPORT"/>
+
+        <addUniqueConstraint
+                columnNames="name, passport_id"
+                constraintName="UNQ_STUDENTNAME_PASSPORT_ID"
+                tableName="STUDENT"/>
+    </changeSet>
+
+    <changeSet author="Petko Trenev" id="23032019-initial-create-indexes">
+        <createIndex indexName="INDEX_STUDENT_PASSPORT" tableName="student">
+            <column name="passport_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="24032019-initial-insert-review_rating" author="Petko Trenev">
+        <insert tableName="review_rating">
+            <column name="rating">POOR</column>
+            <column name="description">Poor</column>
+        </insert>
+        <insert tableName="review_rating">
+            <column name="rating">FINE</column>
+            <column name="description">Fine</column>
+        </insert>
+        <insert tableName="review_rating">
+            <column name="rating">GOOD</column>
+            <column name="description">Good</column>
+        </insert>
+        <insert tableName="review_rating">
+            <column name="rating">VERYGOOD</column>
+            <column name="description">Very Good</column>
+        </insert>
+        <insert tableName="review_rating">
+            <column name="rating">EXCELLENT</column>
+            <column name="description">Excellent</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
