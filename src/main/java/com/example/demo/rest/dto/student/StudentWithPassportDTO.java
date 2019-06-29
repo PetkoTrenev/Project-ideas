@@ -1,6 +1,5 @@
 package com.example.demo.rest.dto.student;
 
-import com.example.demo.model.Passport;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +14,4 @@ import java.io.Serializable;
 public class StudentWithPassportDTO implements Serializable {
 
     private String name;
-    private Passport passport;
 }

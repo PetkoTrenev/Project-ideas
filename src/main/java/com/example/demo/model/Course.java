@@ -32,7 +32,8 @@ public class Course {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "review_id")
     private List<Review> reviews;
 
     @ManyToMany(cascade=CascadeType.ALL)

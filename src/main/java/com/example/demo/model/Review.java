@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.enums.Rating;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,13 +18,9 @@ public class Review {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "rating")
-    @Enumerated(EnumType.STRING)
-    private Rating rating;
+    private String title;
 
-    private String description;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    private ReviewDetails reviewDetails;
 }

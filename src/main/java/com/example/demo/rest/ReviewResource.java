@@ -6,6 +6,7 @@ import com.example.demo.model.Review;
 import com.example.demo.rest.dto.review.ReviewDTO;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.ReviewService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,18 +19,13 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/review")
 public class ReviewResource {
 
     private final ReviewService reviewService;
     private final ReviewMapper reviewMapper;
     private final CourseService courseService;
-
-    public ReviewResource(ReviewService reviewService, ReviewMapper reviewMapper, CourseService courseService) {
-        this.reviewService = reviewService;
-        this.reviewMapper = reviewMapper;
-        this.courseService = courseService;
-    }
 
     @PostMapping("/save")
     @Transactional
@@ -41,12 +37,7 @@ public class ReviewResource {
         Review review = reviewMapper.reviewDTOtoReview(reviewDTO);
 
         if (optionalCourse.isPresent()) {
-            Course course = optionalCourse.get();
-            review.setCourse(course);
             reviewService.save(review);
-//            course.getReviews().add(review);
-//            review.setCourse(course);
-//            courseService.save(course);
         }
 
         return ResponseEntity.ok(reviewMapper.reviewToReviewDTO(review));

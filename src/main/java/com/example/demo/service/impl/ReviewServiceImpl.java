@@ -21,9 +21,4 @@ public class ReviewServiceImpl implements ReviewService {
     public Review save(Review review) {
         return reviewRepository.save(review);
     }
-
-    @Override
-    public Optional<Review> findByRating(String rating) {
-        return reviewRepository.findByRating(rating);
-    }
 }

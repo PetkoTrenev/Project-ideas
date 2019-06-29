@@ -6,14 +6,15 @@ spring:
     show-sql: true
     hibernate:
       use-new-id-generator-mappings: false
+      ddl-auto: create
   datasource:
     url: jdbc:mysql://localhost:3306/tests?useSSL=false&createDatabaseIfNotExist=true
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-
-  liquibase:
-    change-log: classpath:db/changelog/master.xml
+#
+#  liquibase:
+#    change-log: classpath:db/changelog/master.xml
 
   data:
     mongodb:

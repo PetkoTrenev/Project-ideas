@@ -5,24 +5,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.1
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.1.xsd">
     <changeSet author="Petko Trenev" id="23032019-initial-create-database-tables">
-        <comment>Creates the initial database schema - tests</comment>
+        <comment>Creates the initial database schema</comment>
         <createTable tableName="student">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(64)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="passport_id" type="BIGINT">
-                <constraints nullable="true"/>
-            </column>
-        </createTable>
-
-        <createTable tableName="passport">
-            <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="number" type="VARCHAR(65)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -65,13 +53,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-
-    <changeSet author="Petko Trenev" id="23032019-initial-add-foreign-keys">
-        <addForeignKeyConstraint baseColumnNames="passport_id" baseTableName="student"
-                                 constraintName="fk_STUDENT_PASSWORD"
-                                 referencedColumnNames="id"
-                                 referencedTableName="passport"/>
 
         <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="review"
                                  constraintName="fk_COURSE_REVIEWS"
@@ -81,24 +62,6 @@
         <addForeignKeyConstraint baseColumnNames="rating" baseTableName="review"
                                  constraintName="fk_REVIEW_RATING"
                                  referencedColumnNames="rating" referencedTableName="review_rating"/>
-    </changeSet>
-
-    <changeSet id="24032019-initial-add-unique-constraints" author="Petko Trenev">
-        <addUniqueConstraint
-                columnNames="number"
-                constraintName="UNQ_PASSPORT_NUMBER"
-                tableName="PASSPORT"/>
-
-        <addUniqueConstraint
-                columnNames="name, passport_id"
-                constraintName="UNQ_STUDENTNAME_PASSPORT_ID"
-                tableName="STUDENT"/>
-    </changeSet>
-
-    <changeSet author="Petko Trenev" id="23032019-initial-create-indexes">
-        <createIndex indexName="INDEX_STUDENT_PASSPORT" tableName="student">
-            <column name="passport_id"/>
-        </createIndex>
     </changeSet>
 
     <changeSet id="24032019-initial-insert-review_rating" author="Petko Trenev">

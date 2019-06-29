@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Data
@@ -22,11 +21,4 @@ public class Student implements Serializable {
 
     @Column(nullable = false)
     private String name;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "passport_id")
-    private Passport passport;
-
-    @ManyToMany
-    Set<Course> likedCourses;
 }

@@ -7,6 +7,4 @@ import java.util.Optional;
 public interface ReviewService {
 
     Review save(Review review);
-
-    Optional<Review> findByRating(String rating);
 }
