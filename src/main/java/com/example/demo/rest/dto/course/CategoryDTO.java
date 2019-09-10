@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CourseDTO {
+public class CategoryDTO {
 
-    private Long id;
-    private String courseName;
-    private CategoryDTO categoryDTO;
+    private String categoryName;
 }

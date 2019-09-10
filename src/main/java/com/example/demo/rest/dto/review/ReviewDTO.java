@@ -1,6 +1,6 @@
 package com.example.demo.rest.dto.review;
 
-import com.example.demo.enums.Rating;
+import com.example.demo.model.ReviewDetails;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReviewDTO {
 
-    private Rating rating;
-    private Long courseId;
-    private String description;
+    private String name;
+    private ReviewDetails reviewDetails;
+
 }

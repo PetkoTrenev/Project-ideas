@@ -26,6 +26,21 @@ public class Course {
     @Column(nullable = false)
     private String name;
 
+    /**
+     *
+     */
+    @Column
+    private String whatYouWillLearn;
+
+    @Column
+    private String courseContent;
+
+    @Column
+    private String requirements;
+
+    @Column
+    private String description;
+
     @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
 
@@ -33,12 +48,13 @@ public class Course {
     private LocalDateTime createdDate;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "review_id")
+    @JoinColumn(name = "course_id")
     private List<Review> reviews;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="user_course", joinColumns=@JoinColumn(name="course_id"), inverseJoinColumns=@JoinColumn(name="student_id"))
     public Set<Student> students;
 
-
+    @OneToOne
+    public Category category;
 }

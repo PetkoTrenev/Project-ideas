@@ -21,9 +21,10 @@ public class Instructor {
     private Long id;
 
     private String name;
+
     private String info;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="instructor_course", joinColumns=@JoinColumn(name="instructor_id"), inverseJoinColumns=@JoinColumn(name="course_id"))
-    public Set<Student> courses;
+    public Set<Course> courses;
 }
